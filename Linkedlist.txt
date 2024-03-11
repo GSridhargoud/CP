@@ -1,0 +1,102 @@
+1 > Remove Nodes From Linked List
+
+####code####
+
+        p=[]
+        t=head
+        while t!=None:
+            while p and p[-1]<t.val:
+                p.pop()
+            p.append(t.val)
+            t=t.next
+        head=None
+        for i in p:
+            q=ListNode(i)
+            if head==None:
+                head=temp=q
+            else:
+                temp.next=q
+                temp=q
+        temp.next=None
+        return head
+
+2 > Merge Nodes in Between Zeros
+
+####code####
+
+        t=head
+        q=head
+        c=0
+        while t!=None:
+            if t.val==0 and c!=0:
+                q.val=c
+                if head.val==0:
+                    head=temp=q
+                else:
+                    if q.val!=0:
+                        temp.next=q
+                        temp=q
+                q=t
+                t=t.next
+                c=0
+            else:
+                c=c+t.val
+                q=t
+                t=t.next
+        temp.next=None
+        return head
+
+3 > Maximum Twin Sum of a Linked List
+
+
+####code####
+        l=[]
+        q=head
+        w=0
+        while q!=None:
+            w=w+1
+            q=q.next
+        o=0
+        q=head
+        while o<w//2:
+            l.append(q.val)
+            q=q.next
+            o=o+1
+        while q!=None:
+            l[o-1]+=q.val
+            o=o-1
+            q=q.next
+        return max(l)
+
+4 > Next Greater Node In Linked List
+
+####code####
+        pos=-1
+        stack,ans=[],[]
+        while head:
+            pos +=1
+            ans.append(0)
+            while stack and stack[-1][-1]<head.val:
+                index,value=stack.pop()
+                ans[index]=head.val
+            stack.append((pos,head.val))
+            head=head.next
+        return ans
+
+
+5 > Partition of LinkedList
+
+####Code####
+temp = low = ListNode(-1)
+high = temp1 = ListNode(-1)
+while head:
+    if head.val < x:
+        low.next = head
+        low = low.next
+    else:
+        temp1.next = head
+        temp1 = temp1.next
+    head = head.next
+temp1.next = None
+low.next = high.next
+return temp.next
